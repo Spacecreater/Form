@@ -2,8 +2,8 @@
 
 session_start();
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/incs/data.php';
-require_once __DIR__ . '/incs/functions.php';
+require_once __DIR__ . '/app/data.php';
+require_once __DIR__ . '/app/functions.php';
 
 if(!empty($_POST)){
   $fields = load($fields);
@@ -29,7 +29,7 @@ if(!empty($_POST)){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	    <title>Форма для обработки данных</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div class="container">
@@ -93,7 +93,7 @@ if(!empty($_POST)){
                 <div class="mt-3" id="answer"></div>
 
                 <div class="loader">
-                    <img src="ripple.svg" alt="">
+                    <img src="img/ripple.svg" alt="">
                 </div>
             </form>
 
@@ -102,7 +102,7 @@ if(!empty($_POST)){
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="main.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 </html>
