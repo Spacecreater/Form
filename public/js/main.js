@@ -21,12 +21,12 @@
                         success: function (response) {
                             $('.loader').fadeOut('slow', function () {
                                 let res = JSON.parse(response);
-                                if(res.answer == 'ok'){
+                                if (res.answer == 'ok'){
                                     $('#form').removeClass('was-validated').trigger('reset');
                                     $('#label-captcha').text(res.captcha);
                                     $('#answer').html(`<div class="alert alert-success" role="alert">Спасибо за обращение!
                             </div>`);
-                                }else{
+                                } else {
                                     $('#answer').html(`<div class="alert alert-danger" role="alert">${res.errors}
                             </div>`);
                                 }
