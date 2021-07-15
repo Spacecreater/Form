@@ -1,40 +1,41 @@
 <?php
 
 session_start();
-require_once('C:\OpenServer\domains\localhost\form\vendor\autoload.php');
-require_once('C:\OpenServer\domains\localhost\form\app\data.php');
-require_once('C:\OpenServer\domains\localhost\form\app\functions.php');
+require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__ . '/../app/data.php');
+require_once(__DIR__ . '/../app/functions.php');
 
-if(!empty($_POST)){
-  $fields = load($fields);
-  if($errors = validate($fields)){
+if (! empty($_POST)) {
+    $fields = load ($fields);
+
+  if ($errors = validate ($fields) ) {
     $res = ['answer' => 'error', 'errors' => $errors];
-    }else{
-      if(!send_mail($fields, $mail_settings)) {
+  } else {
+      if (! send_mail($fields, $mail_settings)) {
           $res = ['answer' => 'error', 'errors' => 'Ошибка отправки письма'];
-      }else {
+  } else {
           $res = ['answer' => 'ok', 'captcha' => set_captcha()];
-      }
-    }
-  exit(json_encode($res));
   }
+  }
+  exit (json_encode($res));
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
+    <meta charset="UTF-8">
+    <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	    <title>Форма для обработки данных</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>Форма для обработки данных</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <div class="container">
-	<div class="row">
-		<div class="col-md-6 offset-md-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
 
             <form method="post" id="form" class="needs-validation mt-5 mb-5" novalidate>
 
