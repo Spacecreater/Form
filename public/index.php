@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-require_once(realpath(dirname(__FILE__) . 'C:\OpenServer\domains\localhost\form\vendor\autoload.php'));
-require_once __DIR__ . '/app/data.php';
-require_once __DIR__ . '/app/functions.php';
+require_once('C:\OpenServer\domains\localhost\form\vendor\autoload.php');
+require_once('C:\OpenServer\domains\localhost\form\app\data.php');
+require_once('C:\OpenServer\domains\localhost\form\app\functions.php');
 
 if(!empty($_POST)){
   $fields = load($fields);
