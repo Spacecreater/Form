@@ -1,42 +1,59 @@
 <?php
 
-function debug($data) {
+function debug($data) 
+{
     echo '<pre>' . print_r($data, 1) . '</pre>';
 }
 
-function load($data) {
+function load($data)
+{
+
     foreach ($_POST as $k =>$v) {
-        if(array_key_exists($k, $data)) {
+
+        if (array_key_exists($k, $data)) {
             $data[$k]['value'] = trim($v);
         }
+        
     }
+
     return $data;
 }
 
-function validate($data) {
+function validate($data)
+{
     $errors = '';
+
     foreach ($data as $k => $v) {
-        if($data[$k]['required'] && empty($data[$k] ['value'])) {
+
+        if ($data[$k]['required'] && empty($data[$k] ['value'])) {
             $errors .="<li>Вы не заполнили поле {$data[$k]['field_name']}</li>";
         }
+
     }
-    if(!check_captcha($data['captcha']['value'])){
+
+    if (! check_captcha($data['captcha']['value'])) {
         $errors .="<li>Неверно заполнено поле Captcha</li>";
     }
-return $errors;
+
+    return $errors;
 }
-function set_captcha(){
+function set_captcha()
+{
     $num1 = rand(1, 10);
     $num2 = rand(1, 10);
     $_SESSION['captcha'] = $num1 + $num2;
+
     return "Сколько будет {$num1} + {$num2}?";
 }
 
-function check_captcha($res) {
+function check_captcha($res)
+{
+
     return $_SESSION['captcha'] == $res;
 }
 
-function send_mail($fields, $mail_settings) {
+function send_mail($fields, $mail_settings)
+{
     $mail = new \PHPMailer\PHPMailer\PHPMailer();
 
     try {
@@ -57,8 +74,11 @@ function send_mail($fields, $mail_settings) {
         $mail->Subject = 'Форма с сайта';
         $flag = true;
         $message = '';
+
         foreach ($fields as $k => $v) {
-            if(isset($v['mailable']) && $v['mailable'] == 0) {
+
+            if (isset($v['mailable']) && $v['mailable'] == 0) {
+
                 continue;
             }
 
@@ -68,13 +88,17 @@ function send_mail($fields, $mail_settings) {
         }
 
         $mail->Body = "<table style='width: 100%;'>$message</table>";
-        if (!$mail->send()){
+
+        if (! $mail->send()) {
+
             return false;
         }
 
         return true;
+
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+
         return false;
     }
 

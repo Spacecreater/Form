@@ -17,6 +17,7 @@ if (! empty($_POST)) {
           $res = ['answer' => 'ok', 'captcha' => set_captcha()];
   }
   }
+
   exit (json_encode($res));
 }
 
